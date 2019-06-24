@@ -1,4 +1,5 @@
 ## Knotgrass
+Knotgrass is an distributed decentrialized database that based on a block chain.
 
 ### Prerequisites to develop and test project
 - JDK 11 (JavaSE 11)
