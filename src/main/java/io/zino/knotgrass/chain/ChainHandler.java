@@ -1,19 +1,24 @@
-package io.zino.knotgrass;
+package io.zino.knotgrass.chain;
 
-import io.zino.knotgrass.chain.*;
+import com.google.common.eventbus.Subscribe;
 import io.zino.knotgrass.chain.block.ChainRepository;
 import io.zino.knotgrass.chain.block.impl.Chainsaw;
 import io.zino.knotgrass.chain.block.impl.SimpleBlockRepository;
-import io.zino.knotgrass.chain.transaction.impl.SimpleTransactionRepository;
 import io.zino.knotgrass.chain.transaction.TransactionRepository;
+import io.zino.knotgrass.chain.transaction.impl.SimpleTransactionRepository;
 
-public class Dana {
+public enum ChainHandler {
+    INSTANCE;
+
+    public static class PublishTransactionRequest {
+    }
+
     private final DBHandler dbHandler;
     private final ChainRepository blockRepository;
     private final Chainsaw blockService;
     private final TransactionRepository transactionRepository;
 
-    public Dana() {
+    ChainHandler() {
         this.dbHandler = new DBHandler(this);
         this.blockRepository = new SimpleBlockRepository(this);
         this.blockService = new Chainsaw(this);
@@ -36,11 +41,10 @@ public class Dana {
         return transactionRepository;
     }
 
-    abstract public static class DanaService {
-        private final Dana dana;
-        public DanaService(Dana dana) {
-            this.dana = dana;
-        }
-    }
 
+
+    @Subscribe
+    public void handle(PublishTransactionRequest request) {
+        System.out.println("ooooooooooooh");
+    }
 }

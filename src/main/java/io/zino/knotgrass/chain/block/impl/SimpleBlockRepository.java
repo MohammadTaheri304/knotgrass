@@ -2,9 +2,9 @@ package io.zino.knotgrass.chain.block.impl;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import io.zino.knotgrass.Dana;
-import io.zino.knotgrass.chain.block.domain.BlockDO;
+import io.zino.knotgrass.chain.ChainHandler;
 import io.zino.knotgrass.chain.block.ChainRepository;
+import io.zino.knotgrass.chain.block.domain.BlockDO;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -12,11 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleBlockRepository extends Dana.DanaService implements ChainRepository {
+public class SimpleBlockRepository implements ChainRepository {
     private final MongoCollection<Document> collection;
 
-    public SimpleBlockRepository(Dana dana) {
-        super(dana);
+    public SimpleBlockRepository(ChainHandler dana) {
         this.collection = dana.getDbHandler().getKnotgrassDB().getCollection("blocks");
     }
 

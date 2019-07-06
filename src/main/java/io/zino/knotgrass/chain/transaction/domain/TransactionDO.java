@@ -3,6 +3,8 @@ package io.zino.knotgrass.chain.transaction.domain;
 import com.google.gson.Gson;
 import org.bson.Document;
 
+import java.util.Objects;
+
 public class TransactionDO {
     private final static Gson GSON = new Gson();
 
@@ -97,5 +99,23 @@ public class TransactionDO {
         tnx.setToUuid(doc.getString(TransactionDO.PRP_TO_UUID));
         tnx.setSig(doc.getString(TransactionDO.PRP_SIG));
         return tnx;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TransactionDO that = (TransactionDO) o;
+        return Objects.equals(uuid, that.uuid) &&
+                Objects.equals(fromUuid, that.fromUuid) &&
+                Objects.equals(toUuid, that.toUuid) &&
+                Objects.equals(amount, that.amount) &&
+                Objects.equals(sig, that.sig);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(uuid, fromUuid, toUuid, amount, sig);
     }
 }

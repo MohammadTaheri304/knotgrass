@@ -2,7 +2,7 @@ package io.zino.knotgrass.chain.transaction.impl;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import io.zino.knotgrass.Dana;
+import io.zino.knotgrass.chain.ChainHandler;
 import io.zino.knotgrass.chain.transaction.TransactionRepository;
 import io.zino.knotgrass.chain.transaction.domain.TransactionDO;
 import org.bson.Document;
@@ -12,12 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleTransactionRepository extends Dana.DanaService implements TransactionRepository {
+public class SimpleTransactionRepository implements TransactionRepository {
 
     private final MongoCollection<Document> collection;
 
-    public SimpleTransactionRepository(Dana dana) {
-        super(dana);
+    public SimpleTransactionRepository(ChainHandler dana) {
         this.collection = dana.getDbHandler().getKnotgrassDB().getCollection(TransactionDO.COLLECTION);
     }
 

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package io.zino.network;
+
+message ChatMessage {
+    string from = 1;
+    string message = 2;
+}
+
+message ChatMessageFromServer {
+    ChatMessage message = 1;
+}
+
+service NetworkService {
+    rpc chat(stream ChatMessage) returns (stream ChatMessageFromServer);
+}
