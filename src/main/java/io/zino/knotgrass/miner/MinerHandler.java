@@ -1,9 +1,13 @@
 package io.zino.knotgrass.miner;
 
 import com.google.common.eventbus.Subscribe;
+import io.zino.knotgrass.Context;
 
-public enum MinerHandler {
-    INSTANCE;
+public class MinerHandler {
+    public MinerHandler(Context context) {
+
+    }
+
 
     public static class PublishTransactionRequest {
     }

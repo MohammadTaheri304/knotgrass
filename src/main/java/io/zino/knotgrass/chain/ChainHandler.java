@@ -1,14 +1,14 @@
 package io.zino.knotgrass.chain;
 
 import com.google.common.eventbus.Subscribe;
+import io.zino.knotgrass.Context;
 import io.zino.knotgrass.chain.block.ChainRepository;
 import io.zino.knotgrass.chain.block.impl.Chainsaw;
 import io.zino.knotgrass.chain.block.impl.SimpleBlockRepository;
 import io.zino.knotgrass.chain.transaction.TransactionRepository;
 import io.zino.knotgrass.chain.transaction.impl.SimpleTransactionRepository;
 
-public enum ChainHandler {
-    INSTANCE;
+public class ChainHandler {
 
     public static class PublishTransactionRequest {
     }
@@ -18,7 +18,7 @@ public enum ChainHandler {
     private final Chainsaw blockService;
     private final TransactionRepository transactionRepository;
 
-    ChainHandler() {
+    public ChainHandler(Context context) {
         this.dbHandler = new DBHandler(this);
         this.blockRepository = new SimpleBlockRepository(this);
         this.blockService = new Chainsaw(this);
@@ -40,8 +40,6 @@ public enum ChainHandler {
     public TransactionRepository getTransactionRepository() {
         return transactionRepository;
     }
-
-
 
     @Subscribe
     public void handle(PublishTransactionRequest request) {
