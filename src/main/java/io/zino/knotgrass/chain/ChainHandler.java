@@ -5,13 +5,12 @@ import io.zino.knotgrass.Context;
 import io.zino.knotgrass.chain.block.ChainRepository;
 import io.zino.knotgrass.chain.block.impl.Chainsaw;
 import io.zino.knotgrass.chain.block.impl.SimpleBlockRepository;
+import io.zino.knotgrass.chain.request.ReviewBlockrequest;
+import io.zino.knotgrass.chain.request.ReviewTransactionrequest;
 import io.zino.knotgrass.chain.transaction.TransactionRepository;
 import io.zino.knotgrass.chain.transaction.impl.SimpleTransactionRepository;
 
 public class ChainHandler {
-
-    public static class PublishTransactionRequest {
-    }
 
     private final DBHandler dbHandler;
     private final ChainRepository blockRepository;
@@ -42,7 +41,12 @@ public class ChainHandler {
     }
 
     @Subscribe
-    public void handle(PublishTransactionRequest request) {
+    public void handle(ReviewBlockrequest request) {
+        System.out.println("ooooooooooooh");
+    }
+
+    @Subscribe
+    public void handle(ReviewTransactionrequest request) {
         System.out.println("ooooooooooooh");
     }
 }

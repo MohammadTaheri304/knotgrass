@@ -2,15 +2,27 @@ syntax = "proto3";
 
 package io.zino.network;
 
-message ChatMessage {
+message PublishTransactionRequest {
+    //    todo
     string from = 1;
     string message = 2;
 }
 
-message ChatMessageFromServer {
-    ChatMessage message = 1;
+message PublishTransactionResponse {
+    bool success = 1;
+}
+
+message PublishBlockRequest {
+    //    todo
+    string from = 1;
+    string message = 2;
+}
+
+message PublishBlockResponse {
+    bool success = 1;
 }
 
 service NetworkService {
-    rpc chat(stream ChatMessage) returns (stream ChatMessageFromServer);
+    rpc publishTransaction (PublishTransactionRequest) returns (PublishTransactionResponse);
+    rpc publishBlock (PublishBlockRequest) returns (PublishBlockResponse);
 }

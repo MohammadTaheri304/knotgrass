@@ -4,14 +4,12 @@ import com.google.common.eventbus.Subscribe;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.zino.knotgrass.Context;
+import io.zino.knotgrass.network.request.PublishBlockRequest;
+import io.zino.knotgrass.network.request.PublishTransactionRequest;
 
 import java.io.IOException;
 
 public class NetworkHandler {
-
-
-    public static class PublishTransactionRequest {
-    }
 
     public NetworkHandler(Context context) {
         new Thread(new Runnable() {
@@ -19,7 +17,7 @@ public class NetworkHandler {
             public void run() {
                 try {
                     Server server = ServerBuilder.forPort(8080)
-                            .addService(new Hookup(NetworkHandler.this)).build();
+                            .addService(new NetworkServiceProvider(NetworkHandler.this)).build();
                     System.out.println("Starting server...");
                     server.start();
                     System.out.println("Server started!");
@@ -35,6 +33,11 @@ public class NetworkHandler {
 
     @Subscribe
     public void handle(PublishTransactionRequest request) {
+        System.out.println("ooooooooooooh");
+    }
+
+    @Subscribe
+    public void handle(PublishBlockRequest request) {
         System.out.println("ooooooooooooh");
     }
 }
