@@ -1,12 +1,19 @@
 package io.zino.knotgrass.miner;
 
+import com.google.common.hash.Hashing;
 import io.zino.knotgrass.chain.block.domain.BlockDO;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 public class Miner {
 
     private final CurrentMiningBlock currentMiningBlock;
+    private final Random random = new Random(System.currentTimeMillis());
+    private final MinerHandler minerHandler;
 
-    public Miner(MinerHandler dana) {
+    public Miner(MinerHandler minerHandler) {
+        this.minerHandler = minerHandler;
         currentMiningBlock = new CurrentMiningBlock();
 
         new Thread(() -> {
@@ -50,6 +57,22 @@ public class Miner {
     }
 
     private void tryTheBlock(BlockDO blockDO) {
-        // TODO
+        // TODO get the miner uuid from config
+        blockDO.setMinnerUuid("replace-with-miner-uuid>");
+        blockDO.setNonce(random.nextLong());
+        String sha256hex = Hashing.sha256()
+                .hashString(blockDO.toString(), StandardCharsets.UTF_8)
+                .toString();
+        // TODO compute hash-cash size
+        Long hashCashSize = 3L;
+        Boolean checkForHashCash = checkForHashCash(sha256hex, hashCashSize);
+        if (checkForHashCash) {
+            this.minerHandler.sendPublishBlockResuest(blockDO);
+        }
+    }
+
+    private Boolean checkForHashCash(String hash, Long size) {
+        // todo
+        return false;
     }
 }
