@@ -1,15 +1,39 @@
 package io.zino.knotgrass.miner;
 
 import io.zino.knotgrass.chain.block.domain.BlockDO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
+/**
+ * The simple miner implementation
+ *
+ * @author Mohammad Taheri
+ */
 public class Miner {
+    private Logger logger = LoggerFactory.getLogger(Miner.class);
 
+    /**
+     * Current mining block instance
+     */
     private final CurrentMiningBlock currentMiningBlock;
+
+    /**
+     * Random instance
+     */
     private final Random random = new Random(System.currentTimeMillis());
+
+    /**
+     * Reference to the miner handler
+     */
     private final MinerHandler minerHandler;
 
+    /**
+     * Miner constructor
+     *
+     * @param minerHandler The miner's handler
+     */
     public Miner(MinerHandler minerHandler) {
         this.minerHandler = minerHandler;
         currentMiningBlock = new CurrentMiningBlock();
@@ -32,10 +56,18 @@ public class Miner {
         }).run();
     }
 
+    /**
+     * Set the given block as the current mining block
+     *
+     * @param blockDO The requested block for mining
+     */
     public void mine(BlockDO blockDO) {
         this.currentMiningBlock.setBlockDO(blockDO);
     }
 
+    /**
+     * Encapsulate the current block for minner
+     */
     private class CurrentMiningBlock {
         private BlockDO blockDO;
         private Long timestaml;
@@ -54,6 +86,11 @@ public class Miner {
         }
     }
 
+    /**
+     * Try to mine the current block
+     *
+     * @param blockDO The requested block for mining
+     */
     private void tryTheBlock(BlockDO blockDO) {
         // TODO get the miner uuid from config
         blockDO.setMinnerUuid("replace-with-miner-uuid>");
@@ -61,13 +98,20 @@ public class Miner {
         String sha256hex = blockDO.computeHash();
         // TODO compute hash-cash size
         Long hashCashSize = 3L;
-        Boolean checkForHashCash = checkForHashCash(sha256hex, hashCashSize);
+        Boolean checkForHashCash = checkForHashCashMatch(sha256hex, hashCashSize);
         if (checkForHashCash) {
             this.minerHandler.sendPublishBlockResuest(blockDO);
         }
     }
 
-    private Boolean checkForHashCash(String hash, Long size) {
+    /**
+     * Check for computed puzzle solution size
+     *
+     * @param hash The computed hash cash
+     * @param size The solution size required
+     * @return True in case that solution match the requirements
+     */
+    private Boolean checkForHashCashMatch(String hash, Long size) {
         // todo
         return false;
     }
