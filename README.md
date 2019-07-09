@@ -35,5 +35,18 @@ mvn javadoc:javadoc
 ### Contributing
 To contribute on project please see [CONTRIBUTING](CONTRIBUTING.md).
 
+```aidl
++------------------------------------------------+
+|                  Event Bus                     |
++-----+-+-------------+-+--------------+-+-------+
+      ^ |             ^ |              ^ |
+      | v             | v              | v
+ +----+-+-----+  +----+-+------+  +----+-+------+
+ |            |  |             |  |             |
+ |    Miner   |  |    Chain    |  |   Network   |
+ |            |  |             |  |             |
+ +------------+  +-------------+  +-------------+
+```
+
 ### Contributors
 List of Contributors on [CONTRIBUTORS](CONTRIBUTORS.md).
