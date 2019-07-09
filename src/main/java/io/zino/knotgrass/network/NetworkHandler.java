@@ -11,12 +11,15 @@ import java.io.IOException;
 
 public class NetworkHandler {
 
+    private final NetworkServiceConsumer networkServiceConsumer;
+
     public NetworkHandler(Context context) {
+        final Integer serverPort = context.getServerPort();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Server server = ServerBuilder.forPort(8080)
+                    Server server = ServerBuilder.forPort(serverPort)
                             .addService(new NetworkServiceProvider(NetworkHandler.this)).build();
                     System.out.println("Starting server...");
                     server.start();
@@ -29,15 +32,17 @@ public class NetworkHandler {
                 }
             }
         }).start();
+
+        this.networkServiceConsumer = new NetworkServiceConsumer(this);
     }
 
     @Subscribe
     public void handle(PublishTransactionRequest request) {
-        System.out.println("ooooooooooooh");
+        this.networkServiceConsumer.publishTransactionToNetwork(request.getTransactionDO());
     }
 
     @Subscribe
     public void handle(PublishBlockRequest request) {
-        System.out.println("ooooooooooooh");
+        this.networkServiceConsumer.publishBlockToNetwork(request.getBlockDO());
     }
 }

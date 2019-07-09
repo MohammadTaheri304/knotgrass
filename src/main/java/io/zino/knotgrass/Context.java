@@ -50,4 +50,7 @@ public class Context {
         return this.properties.getProperty("database.name");
     }
 
+    public Integer getServerPort(){
+        return Integer.parseInt(this.properties.getProperty("server.port"));
+    }
 }
