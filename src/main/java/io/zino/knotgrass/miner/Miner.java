@@ -11,14 +11,16 @@ public class Miner {
 
         new Thread(() -> {
             while (true) {
-                if (currentMiningBlock.getBlockDO() == null) {
-                    try {
-                        this.wait(1000l);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                synchronized (this) {
+                    if (currentMiningBlock.getBlockDO() == null) {
+                        try {
+                            this.wait(1000l);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Miner.this.mine(currentMiningBlock.getBlockDO());
                     }
-                } else {
-                    Miner.this.mine(currentMiningBlock.getBlockDO());
                 }
             }
 
