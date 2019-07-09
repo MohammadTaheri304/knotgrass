@@ -1,6 +1,9 @@
 package io.zino.knotgrass.chain.block.domain;
 
+import com.google.common.hash.Hashing;
 import org.bson.Document;
+
+import java.nio.charset.StandardCharsets;
 
 public class BlockDO {
 
@@ -145,6 +148,12 @@ public class BlockDO {
         blk.setHash(doc.getString(BlockDO.PRP_HASH));
         blk.setNonce(doc.getLong(BlockDO.PRP_NONCE));
         return blk;
+    }
+
+    public String computeHash() {
+        return Hashing.sha256()
+                .hashString(this.toString(), StandardCharsets.UTF_8)
+                .toString();
     }
 
 }

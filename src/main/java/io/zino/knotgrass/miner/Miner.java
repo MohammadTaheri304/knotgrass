@@ -1,9 +1,7 @@
 package io.zino.knotgrass.miner;
 
-import com.google.common.hash.Hashing;
 import io.zino.knotgrass.chain.block.domain.BlockDO;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 public class Miner {
@@ -60,9 +58,7 @@ public class Miner {
         // TODO get the miner uuid from config
         blockDO.setMinnerUuid("replace-with-miner-uuid>");
         blockDO.setNonce(random.nextLong());
-        String sha256hex = Hashing.sha256()
-                .hashString(blockDO.toString(), StandardCharsets.UTF_8)
-                .toString();
+        String sha256hex = blockDO.computeHash();
         // TODO compute hash-cash size
         Long hashCashSize = 3L;
         Boolean checkForHashCash = checkForHashCash(sha256hex, hashCashSize);
