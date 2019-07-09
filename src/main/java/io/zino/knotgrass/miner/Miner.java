@@ -1,6 +1,6 @@
 package io.zino.knotgrass.miner;
 
-import io.zino.knotgrass.chain.block.domain.BlockDO;
+import io.zino.knotgrass.domain.BlockDO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

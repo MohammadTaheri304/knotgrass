@@ -7,6 +7,12 @@ import io.zino.knotgrass.network.NetworkHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Objects;
+import java.util.Properties;
+
 /**
  * KnotgrassApplication starter class
  *
@@ -22,7 +28,11 @@ public class KnotgrassApplication {
      * @param args input arguments
      */
     public static void main(String[] args) {
-        new KnotgrassApplication().run(args);
+        try {
+            new KnotgrassApplication().run(args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -30,10 +40,13 @@ public class KnotgrassApplication {
      *
      * @param arg input arguments
      */
-    public void run(String arg[]) {
+    public void run(String arg[]) throws Exception {
+        logger.info("Load properties");
+        Properties properties = loadProperties("application-dev.properties");
+
         logger.info("Create eventbus");
         EventBus eventBus = new EventBus();
-        Context context = new Context(eventBus);
+        Context context = new Context(properties, eventBus);
 
         logger.info("Register components at event bus");
         logger.debug("Register ChainHandler at event bus");
@@ -43,5 +56,25 @@ public class KnotgrassApplication {
         logger.debug("Register NetworkHandler at event bus");
         eventBus.register(new NetworkHandler(context));
         logger.info("All components registered at event bus");
+    }
+
+    public Properties loadProperties(String path) throws Exception {
+        logger.debug("Load embedded config");
+        try (InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("application.properties")) {
+            Objects.requireNonNull(inputStream, "initialized input stream is null");
+            Properties properties = new Properties();
+            properties.load(inputStream);
+
+            logger.debug("Load external config");
+            File externalPropertiesFile = new File(path);
+            if (externalPropertiesFile.exists()) {
+                try (InputStream fileInputStream = new FileInputStream(externalPropertiesFile)) {
+                    Properties externalProperties = new Properties();
+                    externalProperties.load(fileInputStream);
+                    properties.putAll(externalProperties);
+                }
+            }
+            return properties;
+        }
     }
 }

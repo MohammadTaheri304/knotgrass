@@ -1,4 +1,4 @@
-package io.zino.knotgrass.chain.transaction.domain;
+package io.zino.knotgrass.domain;
 
 import com.google.gson.Gson;
 import org.bson.Document;

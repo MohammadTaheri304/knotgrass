@@ -3,7 +3,7 @@ package io.zino.knotgrass.miner;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import io.zino.knotgrass.Context;
-import io.zino.knotgrass.chain.block.domain.BlockDO;
+import io.zino.knotgrass.domain.BlockDO;
 import io.zino.knotgrass.miner.request.MineBlockRequest;
 import io.zino.knotgrass.network.request.PublishBlockRequest;
 import org.slf4j.Logger;

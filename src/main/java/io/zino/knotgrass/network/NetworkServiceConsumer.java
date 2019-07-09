@@ -2,8 +2,8 @@ package io.zino.knotgrass.network;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.zino.knotgrass.chain.block.domain.BlockDO;
-import io.zino.knotgrass.chain.transaction.domain.TransactionDO;
+import io.zino.knotgrass.domain.BlockDO;
+import io.zino.knotgrass.domain.TransactionDO;
 
 import java.util.ArrayList;
 import java.util.List;

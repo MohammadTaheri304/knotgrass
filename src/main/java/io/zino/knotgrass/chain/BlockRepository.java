@@ -1,10 +1,9 @@
-package io.zino.knotgrass.chain.block.impl;
+package io.zino.knotgrass.chain;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import io.zino.knotgrass.chain.ChainHandler;
-import io.zino.knotgrass.chain.block.ChainRepository;
-import io.zino.knotgrass.chain.block.domain.BlockDO;
+import com.mongodb.client.MongoDatabase;
+import io.zino.knotgrass.domain.BlockDO;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -12,34 +11,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleBlockRepository implements ChainRepository {
+public class BlockRepository {
     private final MongoCollection<Document> collection;
 
-    public SimpleBlockRepository(ChainHandler dana) {
-        this.collection = dana.getDbHandler().getKnotgrassDB().getCollection("blocks");
+    public BlockRepository(MongoDatabase mongoDatabase) {
+        this.collection = mongoDatabase.getCollection(BlockDO.COLLECTION);
     }
 
-    @Override
     public boolean insert(BlockDO blockDO) {
         this.collection.insertOne(BlockDO.saveTo(blockDO));
         return true;
     }
 
-    @Override
     public List<BlockDO> findByUuid(String uuid) {
         Map<String, Object> params = new HashMap<>();
         params.put(BlockDO.PRP_UUID, uuid);
         return findByArgs(params);
     }
 
-    @Override
     public List<BlockDO> findByIndex(Long index) {
         Map<String, Object> params = new HashMap<>();
         params.put(BlockDO.PRP_INDEX, index);
         return findByArgs(params);
     }
 
-    @Override
     public List<BlockDO> getHighestBlock() {
         // TODO
         return null;

@@ -1,11 +1,11 @@
-package io.zino.knotgrass.network.request;
+package io.zino.knotgrass.chain.request;
 
 import io.zino.knotgrass.domain.BlockDO;
 
-public class PublishBlockRequest {
+public class RegisterBlock {
     private BlockDO blockDO;
 
-    public PublishBlockRequest(BlockDO blockDO) {
+    public RegisterBlock(BlockDO blockDO) {
         this.blockDO = blockDO;
     }
 

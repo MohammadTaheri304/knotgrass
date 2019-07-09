@@ -2,6 +2,8 @@ package io.zino.knotgrass;
 
 import com.google.common.eventbus.EventBus;
 
+import java.util.Properties;
+
 /**
  * Running server context.
  * Use to access configs and modules.
@@ -10,6 +12,7 @@ import com.google.common.eventbus.EventBus;
  */
 public class Context {
 
+    private Properties properties;
     /**
      * Server event-bus.
      * Modules use this event bus for their communications.
@@ -19,9 +22,11 @@ public class Context {
     /**
      * Context constructor
      *
+     * @param properties Config properties
      * @param eventBus Event bus instance
      */
-    public Context(EventBus eventBus) {
+    public Context(Properties properties, EventBus eventBus) {
+        this.properties = properties;
         this.eventBus = eventBus;
     }
 
@@ -32,4 +37,17 @@ public class Context {
     public EventBus getEventBus() {
         return eventBus;
     }
+
+    public String getDatabaseUrl(){
+        return this.properties.getProperty("database.url");
+    }
+
+    public Integer getDatabasePort(){
+        return Integer.parseInt(this.properties.getProperty("database.port"));
+    }
+
+    public String getDatabaseName(){
+        return this.properties.getProperty("database.name");
+    }
+
 }

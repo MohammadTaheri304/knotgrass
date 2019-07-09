@@ -1,10 +1,9 @@
-package io.zino.knotgrass.chain.transaction.impl;
+package io.zino.knotgrass.chain;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import io.zino.knotgrass.chain.ChainHandler;
-import io.zino.knotgrass.chain.transaction.TransactionRepository;
-import io.zino.knotgrass.chain.transaction.domain.TransactionDO;
+import com.mongodb.client.MongoDatabase;
+import io.zino.knotgrass.domain.TransactionDO;
 import org.bson.Document;
 
 import java.util.ArrayList;
@@ -12,21 +11,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleTransactionRepository implements TransactionRepository {
+public class TransactionRepository {
 
     private final MongoCollection<Document> collection;
 
-    public SimpleTransactionRepository(ChainHandler dana) {
-        this.collection = dana.getDbHandler().getKnotgrassDB().getCollection(TransactionDO.COLLECTION);
+    public TransactionRepository(MongoDatabase mongoDatabase) {
+        this.collection = mongoDatabase.getCollection(TransactionDO.COLLECTION);
     }
 
-    @Override
     public boolean insert(TransactionDO transactionDO) {
         this.collection.insertOne(TransactionDO.saveTo(transactionDO));
         return true;
     }
 
-    @Override
     public List<TransactionDO> findByUuid(String uuid) {
         Map<String, Object> params = new HashMap<>();
         params.put(TransactionDO.PRP_UUID, uuid);

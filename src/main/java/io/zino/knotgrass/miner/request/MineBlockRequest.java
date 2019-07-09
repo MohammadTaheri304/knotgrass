@@ -1,6 +1,6 @@
 package io.zino.knotgrass.miner.request;
 
-import io.zino.knotgrass.chain.block.domain.BlockDO;
+import io.zino.knotgrass.domain.BlockDO;
 
 public class MineBlockRequest {
     private BlockDO blockDO;

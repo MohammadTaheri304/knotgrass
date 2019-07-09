@@ -1,4 +1,4 @@
-package io.zino.knotgrass.chain.block.domain;
+package io.zino.knotgrass.domain;
 
 import com.google.common.hash.Hashing;
 import org.bson.Document;
