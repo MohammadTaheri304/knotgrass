@@ -25,6 +25,4 @@ public class KnotgrassApplication {
         eventBus.register(new MinerHandler(context));
         eventBus.register(new NetworkHandler(context));
     }
-
-
 }
