@@ -1,10 +1,8 @@
 package io.zino.knotgrass.network;
 
 import io.grpc.stub.StreamObserver;
-import io.zino.network.Network;
-import io.zino.network.NetworkServiceGrpc.NetworkServiceImplBase;
 
-public class NetworkServiceProvider extends NetworkServiceImplBase {
+public class NetworkServiceProvider extends NetworkServiceGrpc.NetworkServiceImplBase {
 
     public NetworkServiceProvider(NetworkHandler dana) {
         //todo
