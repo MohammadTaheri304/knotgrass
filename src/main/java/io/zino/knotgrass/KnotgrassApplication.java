@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Objects;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * KnotgrassApplication starter class
@@ -46,7 +45,7 @@ public class KnotgrassApplication {
 
         logger.info("Create eventbus");
         EventBus eventBus = new EventBus();
-        Context context = new Context(properties, eventBus);
+        Context context = new Context(properties, eventBus, new HashSet<>());
 
         logger.info("Register components at event bus");
         logger.debug("Register ChainHandler at event bus");
