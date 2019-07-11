@@ -1,5 +1,4 @@
-![](https://api.travis-ci.com/MohammadTaheri304/knotgrass.svg?branch=develop)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/MohammadTaheri304/knotgrass.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MohammadTaheri304/knotgrass/alerts/)
+[![Build Status](https://travis-ci.com/MohammadTaheri304/knotgrass.svg?branch=develop)](https://travis-ci.com/MohammadTaheri304/knotgrass)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/MohammadTaheri304/knotgrass.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MohammadTaheri304/knotgrass/alerts/)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/MohammadTaheri304/knotgrass.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MohammadTaheri304/knotgrass/context:java)
 ```
