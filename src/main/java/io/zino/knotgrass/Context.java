@@ -11,8 +11,11 @@ import java.util.Properties;
  * @author Mohammad Taheri
  */
 public class Context {
-
+    /*
+     * All the application properties
+    */
     private Properties properties;
+
     /**
      * Server event-bus.
      * Modules use this event bus for their communications.
@@ -38,18 +41,34 @@ public class Context {
         return eventBus;
     }
 
+    /**
+     * Get the database url
+     * @return The database url
+     */
     public String getDatabaseUrl(){
         return this.properties.getProperty("database.url");
     }
 
+    /**
+     * Get the database port
+     * @return The database port
+     */
     public Integer getDatabasePort(){
         return Integer.parseInt(this.properties.getProperty("database.port"));
     }
 
+    /**
+     * Get the database name
+     * @return The database name
+     */
     public String getDatabaseName(){
         return this.properties.getProperty("database.name");
     }
 
+    /**
+     * Get the rpc server port
+     * @return The rpc server port
+     */
     public Integer getServerPort(){
         return Integer.parseInt(this.properties.getProperty("server.port"));
     }
