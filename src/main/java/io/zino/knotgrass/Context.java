@@ -2,7 +2,7 @@ package io.zino.knotgrass;
 
 import com.google.common.eventbus.EventBus;
 
-import java.util.Properties;
+import java util.*;
 
 /**
  * Running server context.
@@ -11,7 +11,13 @@ import java.util.Properties;
  * @author Mohammad Taheri
  */
 public class Context {
-    /*
+
+    /**
+     * Set of all servers config
+     */
+    private Set<ServerConfig> serverConfigs;
+
+    /**
      * All the application properties
     */
     private Properties properties;
@@ -28,9 +34,10 @@ public class Context {
      * @param properties Config properties
      * @param eventBus Event bus instance
      */
-    public Context(Properties properties, EventBus eventBus) {
+    public Context(Properties properties, EventBus eventBus, Set<ServerConfig> serverConfig) {
         this.properties = properties;
         this.eventBus = eventBus;
+	this.serverConfig = serverConfig;
     }
 
     /**
@@ -72,4 +79,10 @@ public class Context {
     public Integer getServerPort(){
         return Integer.parseInt(this.properties.getProperty("server.port"));
     }
+
+    /**
+     * Get all the servers config
+     * @return The servers config
+     */
+    public Set<ServerConfig> getServerConfig(){return this.serverConfig;}
 }
