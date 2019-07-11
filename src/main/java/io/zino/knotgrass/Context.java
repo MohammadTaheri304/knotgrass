@@ -15,7 +15,7 @@ public class Context {
     /**
      * Set of all servers config
      */
-    private Set<ServerConfig> serverConfigs;
+    private Set<ServerConfig> serverConfig;
 
     /**
      * All the application properties
