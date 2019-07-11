@@ -1,4 +1,6 @@
 ![](https://api.travis-ci.com/MohammadTaheri304/knotgrass.svg?branch=develop)
+![](https://img.shields.io/lgtm/alerts/g/MohammadTaheri304/knotgrass.svg?logo=lgtm&logoWidth=18)
+![](https://img.shields.io/lgtm/alerts/g/MohammadTaheri304/knotgrass.svg?logo=lgtm&logoWidth=18)
 ```
 ██╗  ██╗███╗   ██╗ ██████╗ ████████╗ ██████╗ ██████╗  █████╗ ███████╗███████╗ 
 ██║ ██╔╝████╗  ██║██╔═══██╗╚══██╔══╝██╔════╝ ██╔══██╗██╔══██╗██╔════╝██╔════╝ 
@@ -46,6 +48,6 @@ To contribute on project please see [CONTRIBUTING](CONTRIBUTING.md).
  |            |  |             |  |             |
  +------------+  +-------------+  +-------------+
 ```
-
+!
 ### Contributors
 List of Contributors on [CONTRIBUTORS](CONTRIBUTORS.md).
