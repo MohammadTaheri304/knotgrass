@@ -27,7 +27,6 @@ public class KnotgrassApplication {
      * @param args input arguments
      */
     public static void main(String[] args) {
-	System.out.println("Whats up?");
         try {
             new KnotgrassApplication().run(args);
         } catch (Exception e) {
