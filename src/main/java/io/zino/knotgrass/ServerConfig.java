@@ -1,6 +1,4 @@
-
-
-pacakge io.zino.knotgrass;
+package io.zino.knotgrass;
 
 public class ServerConfig{
 	private String uuid;
