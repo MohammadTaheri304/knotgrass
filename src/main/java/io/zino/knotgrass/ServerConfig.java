@@ -6,7 +6,7 @@ public class ServerConfig{
         private Integer port;
         private String sign;
 
-        ServrConfig(String uuid, String url, Integer port, String sign){
+        public ServerConfig(String uuid, String url, Integer port, String sign){
         	this.uuid = uuid;
                 this.url = url;
                 this.port = port;
