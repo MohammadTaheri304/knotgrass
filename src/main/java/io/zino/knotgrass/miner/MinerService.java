@@ -1,18 +1,22 @@
 package io.zino.knotgrass.miner;
 
-import io.zino.knotgrass.domain.BlockDO;
+import io.zino.knotgrass.domain.SignedBlockDO;
+import io.zino.knotgrass.domain.UnsignedBlockDO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
 /**
- * The simple miner implementation
+ * Encapsulate all mining logic
  *
  * @author Mohammad Taheri
  */
-public class Miner {
-    private Logger logger = LoggerFactory.getLogger(Miner.class);
+public class MinerService {
+    /**
+     * Class logger
+     */
+    private Logger logger = LoggerFactory.getLogger(MinerService.class);
 
     /**
      * Current mining block instance
@@ -30,11 +34,11 @@ public class Miner {
     private final MinerHandler minerHandler;
 
     /**
-     * Miner constructor
+     * MinerService constructor
      *
      * @param minerHandler The miner's handler
      */
-    public Miner(MinerHandler minerHandler) {
+    public MinerService(MinerHandler minerHandler) {
         this.minerHandler = minerHandler;
         currentMiningBlock = new CurrentMiningBlock();
 
@@ -48,7 +52,7 @@ public class Miner {
                             e.printStackTrace();
                         }
                     } else {
-                        Miner.this.mine(currentMiningBlock.getBlockDO());
+                        MinerService.this.mine(currentMiningBlock.getBlockDO());
                     }
                 }
             }
@@ -61,7 +65,7 @@ public class Miner {
      *
      * @param blockDO The requested block for mining
      */
-    public void mine(BlockDO blockDO) {
+    public void mine(UnsignedBlockDO blockDO) {
         this.currentMiningBlock.setBlockDO(blockDO);
     }
 
@@ -69,14 +73,14 @@ public class Miner {
      * Encapsulate the current block for minner
      */
     private class CurrentMiningBlock {
-        private BlockDO blockDO;
+        private UnsignedBlockDO blockDO;
         private Long timestaml;
 
-        public BlockDO getBlockDO() {
+        public UnsignedBlockDO getBlockDO() {
             return blockDO;
         }
 
-        public void setBlockDO(BlockDO blockDO) {
+        public void setBlockDO(UnsignedBlockDO blockDO) {
             this.timestaml = System.currentTimeMillis();
             this.blockDO = blockDO;
         }
@@ -91,17 +95,29 @@ public class Miner {
      *
      * @param blockDO The requested block for mining
      */
-    private void tryTheBlock(BlockDO blockDO) {
+    private void tryTheBlock(UnsignedBlockDO blockDO) {
         // TODO get the miner uuid from config
-        blockDO.setMinnerUuid("replace-with-miner-uuid>");
+        blockDO.setMinerUuid("replace-with-miner-uuid>");
         blockDO.setNonce(random.nextLong());
         String sha256hex = blockDO.computeHash();
         // TODO compute hash-cash size
         Long hashCashSize = 3L;
         Boolean checkForHashCash = checkForHashCashMatch(sha256hex, hashCashSize);
         if (checkForHashCash) {
-            this.minerHandler.sendPublishBlockResuest(blockDO);
+            SignedBlockDO signedBlockDO = signTheBlock(blockDO);
+            this.minerHandler.sendPublishBlockRequest(signedBlockDO);
         }
+    }
+
+    /**
+     * Sign the given unsigned block
+     *
+     * @param blockDO The unsigned block
+     * @return The signed block
+     */
+    private SignedBlockDO signTheBlock(UnsignedBlockDO blockDO) {
+        // TODO generate a signed block from the given block
+        return null;
     }
 
     /**

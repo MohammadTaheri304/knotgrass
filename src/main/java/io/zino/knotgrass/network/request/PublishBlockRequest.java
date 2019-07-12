@@ -1,15 +1,15 @@
 package io.zino.knotgrass.network.request;
 
-import io.zino.knotgrass.domain.BlockDO;
+import io.zino.knotgrass.domain.SignedBlockDO;
 
 public class PublishBlockRequest {
-    private BlockDO blockDO;
+    private SignedBlockDO blockDO;
 
-    public PublishBlockRequest(BlockDO blockDO) {
+    public PublishBlockRequest(SignedBlockDO blockDO) {
         this.blockDO = blockDO;
     }
 
-    public BlockDO getBlockDO() {
+    public SignedBlockDO getBlockDO() {
         return blockDO;
     }
 }
