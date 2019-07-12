@@ -4,4 +4,16 @@ cache:
   directories:
   - $HOME/.m2
 install: true
-script: mvn clean package
+jobs:
+  include:
+    - stage: test
+      script:
+        - mvn clean verify
+    - stage: deploy
+      script:
+        - mvn clean package
+stages:
+  - name: test
+    if: type = pull_request
+  - name: deploy
+    if: type = push AND branch = develop
