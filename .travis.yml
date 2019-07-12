@@ -14,6 +14,6 @@ jobs:
         - mvn clean package
 stages:
   - name: test
-    if: type = pull_request
+    if: type = push
   - name: deploy
-    if: type = push AND branch = develop
+    if: type = pull_request
