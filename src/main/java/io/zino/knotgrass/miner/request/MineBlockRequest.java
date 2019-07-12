@@ -1,15 +1,15 @@
 package io.zino.knotgrass.miner.request;
 
-import io.zino.knotgrass.domain.BlockDO;
+import io.zino.knotgrass.domain.UnsignedBlockDO;
 
 public class MineBlockRequest {
-    private BlockDO blockDO;
+    private UnsignedBlockDO blockDO;
 
-    public MineBlockRequest(BlockDO blockDO) {
+    public MineBlockRequest(UnsignedBlockDO blockDO) {
         this.blockDO = blockDO;
     }
 
-    public BlockDO getBlockDO() {
+    public UnsignedBlockDO getBlockDO() {
         return blockDO;
     }
 }

@@ -3,7 +3,7 @@ package io.zino.knotgrass.miner;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import io.zino.knotgrass.Context;
-import io.zino.knotgrass.domain.BlockDO;
+import io.zino.knotgrass.domain.SignedBlockDO;
 import io.zino.knotgrass.miner.request.MineBlockRequest;
 import io.zino.knotgrass.network.request.PublishBlockRequest;
 import org.slf4j.Logger;
@@ -19,9 +19,9 @@ public class MinerHandler {
     private Logger logger = LoggerFactory.getLogger(MinerHandler.class);
 
     /**
-     * Miner instance
+     * {@link MinerService} instance
      */
-    private Miner miner;
+    private MinerService miner;
 
     /**
      * Event-bus instance
@@ -31,10 +31,10 @@ public class MinerHandler {
     /**
      * Class constructor
      *
-     * @param context The server context
+     * @param context The server {@link Context}
      */
     public MinerHandler(Context context) {
-        this.miner = new Miner(this);
+        this.miner = new MinerService(this);
         this.eventBus = context.getEventBus();
     }
 
@@ -54,7 +54,7 @@ public class MinerHandler {
      *
      * @param blockDO The block that should publish
      */
-    void sendPublishBlockResuest(BlockDO blockDO) {
+    void sendPublishBlockRequest(SignedBlockDO blockDO) {
         logger.debug("Called by {}", blockDO);
         this.eventBus.post(new PublishBlockRequest(blockDO));
     }

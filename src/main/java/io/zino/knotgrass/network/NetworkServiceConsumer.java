@@ -2,7 +2,7 @@ package io.zino.knotgrass.network;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.zino.knotgrass.domain.BlockDO;
+import io.zino.knotgrass.domain.UnsignedBlockDO;
 import io.zino.knotgrass.domain.TransactionDO;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class NetworkServiceConsumer {
         return stubs;
     }
 
-    public void publishBlockToNetwork(BlockDO blockDO) {
+    public void publishBlockToNetwork(UnsignedBlockDO blockDO) {
         //todo prepare correct request
         Network.PublishBlockRequest request = Network.PublishBlockRequest.newBuilder().build();
         stubs.parallelStream().forEach(stub -> stub.publishBlock(request));
