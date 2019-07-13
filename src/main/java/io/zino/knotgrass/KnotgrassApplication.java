@@ -57,6 +57,13 @@ public class KnotgrassApplication {
         logger.info("All components registered at event bus");
     }
 
+    /**
+     * Load the properties
+     *
+     * @param path Path of the external property file
+     * @return The properties
+     * @throws Exception if failed to load internal or external properties
+     */
     public Properties loadProperties(String path) throws Exception {
         logger.debug("Load embedded config");
         try (InputStream inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream("application.properties")) {
